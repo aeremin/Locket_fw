@@ -1,0 +1,42 @@
+add_library(chibios
+  hal/vectors.asm
+  hal/crt1.c
+  hal/hal.c
+  hal/hal_st.c
+  hal/nvic.c
+  hal/osal.c
+  hal/stm32_exti.c
+  hal/hal_st_lld.cpp
+  src/chcond.c
+  src/chcore.c
+  src/chdebug.c
+  src/chdynamic.c
+  src/chevents.c
+  src/chmsg.c
+  src/chmtx.c
+  src/chregistry.c
+  src/chschd.c
+  src/chsem.c
+  src/chstats.c
+  src/chsys.c
+  src/chthreads.c
+  src/chtm.c
+  src/chtrace.c
+  src/chvt.c
+  stm32L15x/chcoreasm_v7m.asm
+  stm32L15x/crt0_v7m.asm
+  stm32L15x/chcore_v7m.c
+  stm32L15x/hal_lld.c
+  stm32L15x/stm32_dma.c
+  stm32L15x/stm32_isr.c
+)
+
+target_include_directories(chibios
+  PUBLIC
+    include
+    hal
+    stm32L15x
+    .
+  PRIVATE
+    .. # This is here to include board.h
+)
