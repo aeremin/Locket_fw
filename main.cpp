@@ -51,9 +51,7 @@ void ReadIDfromEE();
 
 // ==== Periphery ====
 Vibro_t VibroMotor {VIBRO_SETUP};
-#if BEEPER_ENABLED
 Beeper_t Beeper {BEEPER_PIN};
-#endif
 
 LedRGBwPower_t Led { LED_R_PIN, LED_G_PIN, LED_B_PIN, LED_EN_PIN };
 
@@ -83,10 +81,8 @@ int main(void) {
 
     Led.Init();
     VibroMotor.Init();
-#if BEEPER_ENABLED // === Beeper ===
     Beeper.Init();
     Beeper.StartOrRestart(bsqBeepBeep);
-#endif
 #if BUTTONS_ENABLED
     SimpleSensors::Init();
 #endif

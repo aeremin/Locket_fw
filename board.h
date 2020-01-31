@@ -5,7 +5,6 @@
 #define APP_NAME            "HeartOfStormPlayer"
 
 // ==== High-level peripery control ====
-#define BEEPER_ENABLED      TRUE
 #define BUTTONS_ENABLED     TRUE
 
 #define SIMPLESENSORS_ENABLED   BUTTONS_ENABLED
