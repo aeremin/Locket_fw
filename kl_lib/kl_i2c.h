@@ -63,9 +63,7 @@ public:
                 Error(false), ThdRef(nullptr) {}
 };
 
-#if I2C1_ENABLED
 extern i2c_t i2c1;
-#endif
 #if I2C2_ENABLED
 extern i2c_t i2c2;
 #endif

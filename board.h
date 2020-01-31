@@ -10,7 +10,6 @@
 // Freq of external crystal if any. Leave it here even if not used.
 #define CRYSTAL_FREQ_HZ     12000000
 
-#define I2C1_ENABLED        TRUE
 #define I2C_USE_SEMAPHORE   FALSE
 #define ADC_REQUIRED        FALSE
 
@@ -51,11 +50,9 @@
 #define DIP_SW8         { GPIOC, 14, pudPullUp }
 
 // I2C
-#if I2C1_ENABLED
 #define I2C1_GPIO       GPIOB
 #define I2C1_SCL        6
 #define I2C1_SDA        7
-#endif
 
 // Pill power
 #define PILL_PWR_PIN    { GPIOB, 3, omPushPull }
@@ -68,10 +65,8 @@
 #if 1 // ========================= Timer =======================================
 #endif // Timer
 
-#if I2C1_ENABLED // ====================== I2C ================================
 #define I2C1_BAUDRATE   400000
 #define I2C_PILL        i2c1
-#endif
 
 #if ADC_REQUIRED // ======================= Inner ADC ==========================
 // Clock divider: clock is generated from the APB2
@@ -99,11 +94,9 @@
 #define UART_DMA_RX     STM32_DMA_STREAM_ID(1, 5)
 #define UART_DMA_CHNL   0   // Dummy
 
-#if I2C1_ENABLED // ==== I2C ====
 #define I2C1_DMA_TX     STM32_DMA_STREAM_ID(1, 6)
 #define I2C1_DMA_RX     STM32_DMA_STREAM_ID(1, 7)
 #define I2C1_DMA_CHNL   0   // Dummy
-#endif
 
 #if ADC_REQUIRED
 #define ADC_DMA         STM32_DMA1_STREAM1

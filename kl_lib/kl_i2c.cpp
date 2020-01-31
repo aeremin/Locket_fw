@@ -26,7 +26,6 @@
 #define I2C3_DMA_CHNL   3
 #endif
 
-#if I2C1_ENABLED
 static const i2cParams_t I2C1Params = {
         I2C1,
         I2C1_GPIO, I2C1_SCL, I2C1_SDA,
@@ -37,7 +36,6 @@ static const i2cParams_t I2C1Params = {
         I2C_DMARX_MODE(I2C1_DMA_CHNL)
 };
 i2c_t i2c1 {&I2C1Params};
-#endif
 
 #if I2C2_ENABLED
 static const i2cParams_t I2C2Params = {
@@ -440,7 +438,6 @@ uint8_t i2c_t::WaitBTF() {
 #define I2C_SMB_ALERT              0x40    // SMBus Alert
 #endif
 
-#if I2C1_ENABLED
 static const i2cParams_t I2C1Params = {
         I2C1,
         I2C1_GPIO, I2C1_SCL, I2C1_SDA, I2C_AF,
@@ -458,7 +455,6 @@ static const i2cParams_t I2C1Params = {
 #endif
 };
 i2c_t i2c1 {&I2C1Params};
-#endif
 
 #if I2C2_ENABLED
 static const i2cParams_t I2C2Params = {
@@ -888,7 +884,6 @@ void i2c_t::IWakeup() {
 
 #if 1 // =============================== IRQs ==================================
 extern "C" {
-#if I2C1_ENABLED // ==== I2C1 ====
 #if defined STM32L4XX
 OSAL_IRQ_HANDLER(STM32_I2C1_EVENT_HANDLER) {
 //    Uart.PrintfI("i2c1 irq\r");
@@ -919,7 +914,7 @@ OSAL_IRQ_HANDLER(STM32_I2C1_GLOBAL_HANDLER) {
     OSAL_IRQ_EPILOGUE();
 }
 #endif // MCU type
-#endif
+
 #if I2C2_ENABLED // ==== I2C2 ====
 OSAL_IRQ_HANDLER(STM32_I2C2_EVENT_HANDLER) {
     uint32_t isr = I2C2->ISR;
