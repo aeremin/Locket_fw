@@ -13,12 +13,6 @@
 
 #include "SimpleSensors.h"
 
-#ifndef BUTTONS_ENABLED
-#define BUTTONS_ENABLED FALSE
-#endif
-
-#if BUTTONS_ENABLED
-
 /*
  * Example:
             case evtIdButtons:
@@ -75,4 +69,3 @@ struct BtnEvtInfo_t {
 } __packed;
 
 PinSnsState_t GetBtnState(uint8_t BtnID);
-#endif

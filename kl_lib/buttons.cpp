@@ -10,8 +10,6 @@
 #include "uart.h"
 #include "MsgQ.h"
 
-#if BUTTONS_ENABLED
-
 #if BTN_GETSTATE_REQUIRED
 static PinSnsState_t IBtnState[BUTTONS_CNT];
 PinSnsState_t GetBtnState(uint8_t BtnID) {
@@ -213,4 +211,3 @@ void AddEvtToQueue(BtnEvt_t AType, uint8_t KeyIndx) {
 #endif
     EvtQMain.SendNowOrExit(Msg);
 }
-#endif

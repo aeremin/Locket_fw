@@ -11,10 +11,7 @@
 #include "ch.h"
 #include "kl_lib.h"
 #include "EvtMsgIDs.h"
-//#include "board.h"
-#if BUTTONS_ENABLED
 #include "buttons.h"
-#endif
 
 /*
  * Example of other msg:
@@ -59,9 +56,7 @@ union EvtMsg_t {
             } __attribute__((__packed__));
 //            uint8_t b[EMSG_DATA8_CNT];
 //            uint16_t w16[EMSG_DATA16_CNT];
-#if BUTTONS_ENABLED
             BtnEvtInfo_t BtnEvtInfo;
-#endif
         } __attribute__((__packed__));
         uint8_t ID;
     } __attribute__((__packed__));

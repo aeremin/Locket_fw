@@ -83,9 +83,7 @@ int main(void) {
     VibroMotor.Init();
     Beeper.Init();
     Beeper.StartOrRestart(bsqBeepBeep);
-#if BUTTONS_ENABLED
     SimpleSensors::Init();
-#endif
 
     i2c1.Init();
     PillMgr.Init();
@@ -144,7 +142,6 @@ void ITask() {
                 break;
 #endif
 
-#if BUTTONS_ENABLED
             case evtIdButtons:
                 Printf("Btn %u\r", Msg.BtnEvtInfo.BtnID[0]);
                 if(Msg.BtnEvtInfo.Type == beShortPress) {
@@ -164,7 +161,6 @@ void ITask() {
 #endif
                 }
                 break;
-#endif
 
             case evtIdPillConnected:
                 Printf("Pill: %u\r", PillMgr.Pill.DWord32);

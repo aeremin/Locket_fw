@@ -5,9 +5,7 @@
 #define APP_NAME            "HeartOfStormPlayer"
 
 // ==== High-level peripery control ====
-#define BUTTONS_ENABLED     TRUE
-
-#define SIMPLESENSORS_ENABLED   BUTTONS_ENABLED
+#define SIMPLESENSORS_ENABLED   TRUE
 
 // MCU type as defined in the ST header.
 #define STM32L151xB
