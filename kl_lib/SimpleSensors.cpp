@@ -7,8 +7,6 @@
 
 #include "SimpleSensors.h"
 #include "uart.h"
-
-#if SIMPLESENSORS_ENABLED
 #include "PinSnsSettings.h"
 
 static PinSnsState_t States[PIN_SNS_CNT];
@@ -69,4 +67,3 @@ void Shutdown() {
 }
 
 } // namespace
-#endif
