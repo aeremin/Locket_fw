@@ -525,7 +525,7 @@ const stm32_dma_stream_t *dmaStreamAllocI(uint32_t id,
                                           uint32_t priority,
                                           stm32_dmaisr_t func,
                                           void *param) {
-  uint32_t i, startid, endid;
+  uint32_t startid = 0, endid = 0;
 
   osalDbgCheckClassI();
 
@@ -553,7 +553,7 @@ const stm32_dma_stream_t *dmaStreamAllocI(uint32_t id,
     osalDbgCheck(false);
   }
 
-  for (i = startid; i <= endid; i++) {
+  for (int i = startid; i <= endid; i++) {
     uint32_t mask = (1U << i);
     if ((dma.allocated_mask & mask) == 0U) {
       const stm32_dma_stream_t *dmastp = STM32_DMA_STREAM(i);
