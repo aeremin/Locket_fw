@@ -3,7 +3,6 @@
 #include "MsgQ.h"
 #include "kl_lib.h"
 
-#if PILL_ENABLED
 PillMgr_t PillMgr { &I2C_PILL, PILL_PWR_PIN };
 
 void PillMgr_t::Init() {
@@ -108,4 +107,3 @@ uint8_t PillMgr_t::Write(uint8_t MemAddr, void *Ptr, uint32_t Length) {
     Standby();
     return retvOk;
 }
-#endif // PILL_ENABLED

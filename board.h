@@ -5,7 +5,6 @@
 #define APP_NAME            "HeartOfStormPlayer"
 
 // ==== High-level peripery control ====
-#define PILL_ENABLED        TRUE
 #define BEEPER_ENABLED      TRUE
 #define BUTTONS_ENABLED     TRUE
 
@@ -17,7 +16,7 @@
 // Freq of external crystal if any. Leave it here even if not used.
 #define CRYSTAL_FREQ_HZ     12000000
 
-#define I2C1_ENABLED        PILL_ENABLED
+#define I2C1_ENABLED        TRUE
 #define I2C_USE_SEMAPHORE   FALSE
 #define ADC_REQUIRED        FALSE
 

@@ -91,10 +91,8 @@ int main(void) {
     SimpleSensors::Init();
 #endif
 
-#if PILL_ENABLED // === Pill ===
     i2c1.Init();
     PillMgr.Init();
-#endif
 
     // ==== Time and timers ====
     TmrEverySecond.StartOrRestart();
@@ -172,7 +170,6 @@ void ITask() {
                 break;
 #endif
 
-#if PILL_ENABLED // ==== Pill ====
             case evtIdPillConnected:
                 Printf("Pill: %u\r", PillMgr.Pill.DWord32);
 #if SM_EN
@@ -191,7 +188,6 @@ void ITask() {
             case evtIdPillDisconnected:
                 Printf("Pill disconn\r");
                 break;
-#endif
 
             case evtIdShellCmd:
                 OnCmd((Shell_t*)Msg.Ptr);
