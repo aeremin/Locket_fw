@@ -57,9 +57,9 @@
  *
  * @init
  */
-void stInit(void) {
+void stInit(uint32_t system_timer_frequency) {
 
-  st_lld_init();
+  st_lld_init(system_timer_frequency);
 }
 
 #if (OSAL_ST_MODE == OSAL_ST_MODE_FREERUNNING) || defined(__DOXYGEN__)

@@ -251,7 +251,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-  void halInit(void);
+  void halInit(uint32_t system_timer_frequency);
 #ifdef __cplusplus
 }
 #endif

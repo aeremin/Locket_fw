@@ -9,7 +9,7 @@
  *
  * @init
  */
-void halInit(void) {
+void halInit(uint32_t system_timer_frequency) {
 
   /* Initializes the OS Abstraction Layer.*/
 
@@ -100,7 +100,7 @@ void halInit(void) {
  *  configured to require it.
  */
 #if OSAL_ST_MODE != OSAL_ST_MODE_NONE
-  stInit();
+  stInit(system_timer_frequency);
 #endif
 }
 

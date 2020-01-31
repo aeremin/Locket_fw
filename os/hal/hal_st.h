@@ -83,7 +83,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-  void stInit(void);
+  void stInit(uint32_t system_timer_frequency);
   void stStartAlarm(systime_t abstime);
   void stStopAlarm(void);
   void stSetAlarm(systime_t abstime);

@@ -126,7 +126,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-  void st_lld_init(void);
+  void st_lld_init(uint32_t system_timer_frequency);
 #ifdef __cplusplus
 }
 #endif

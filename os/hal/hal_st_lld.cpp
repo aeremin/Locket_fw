@@ -23,7 +23,6 @@
  */
 
 #include "hal.h"
-#include "kl_lib.h"
 
 #if (OSAL_ST_MODE != OSAL_ST_MODE_NONE) || defined(__DOXYGEN__)
 
@@ -262,7 +261,7 @@ OSAL_IRQ_HANDLER(ST_HANDLER) {
  *
  * @notapi
  */
-void st_lld_init(void) {
+void st_lld_init(uint32_t system_timer_frequency) {
 
 #if OSAL_ST_MODE == OSAL_ST_MODE_FREERUNNING
   /* Free running counter mode.*/
@@ -274,7 +273,7 @@ void st_lld_init(void) {
   ST_ENABLE_STOP();
 
   /* Initializing the counter in free running mode.*/
-  STM32_ST_TIM->PSC    = (SYS_TIM_CLK / OSAL_ST_FREQUENCY) - 1;
+  STM32_ST_TIM->PSC    = (system_timer_frequency / OSAL_ST_FREQUENCY) - 1;
   STM32_ST_TIM->ARR    = ST_ARR_INIT;
   STM32_ST_TIM->CCMR1  = 0;
   STM32_ST_TIM->CCR[0] = 0;

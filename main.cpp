@@ -71,7 +71,7 @@ int main(void) {
     Clk.UpdateFreqValues();
 
     // === Init OS ===
-    halInit();
+    halInit(Clk.APB1FreqHz);
     chSysInit();
     EvtQMain.Init();
 
