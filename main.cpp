@@ -13,17 +13,11 @@
 #include "SimpleSensors.h"
 #include "buttons.h"
 
-#define SM_EN   TRUE
-
-//#define DBG_VERBOSE_SAVING  TRUE
-
-#if SM_EN
 #include "health.h"
 #include "ability.h"
 #include "player_type.h"
 #include "qhsm.h"
 #include "Glue.h"
-#endif
 
 #if 1 // ======================== Variables and defines ========================
 // Forever
@@ -36,13 +30,11 @@ static void OnCmd(Shell_t *PShell);
 // EEAddresses
 #define EE_ADDR_DEVICE_ID   0
 
-#if SM_EN
 void InitSM();
 void SendEvent_Health(int QSig, unsigned int Value);
 void SendEvent_Ability(int QSig, unsigned int Value);
 void SendEvent_PlayerType(int QSig, unsigned int Value);
 static healthQEvt e;
-#endif
 
 int32_t ID;
 static const PinInputSetup_t DipSwPin[DIP_SW_CNT] = { DIP_SW8, DIP_SW7, DIP_SW6, DIP_SW5, DIP_SW4, DIP_SW3, DIP_SW2, DIP_SW1 };
@@ -97,9 +89,7 @@ int main(void) {
     VibroMotor.StartOrRestart(vsqBrrBrr);
     chThdSleepMilliseconds(1008);
 
-#if SM_EN
     InitSM();
-#endif
 
     // Main cycle
     ITask();
@@ -113,7 +103,6 @@ void ITask() {
             case evtIdEverySecond:
                 PillMgr.Check();
                 CheckRxData();
-#if SM_EN
                 SendEvent_Health(TIME_TICK_1S_SIG, 0);
                 SendEvent_Ability(TIME_TICK_1S_SIG, 0);
                 SendEvent_PlayerType(TIME_TICK_1S_SIG, 0);
@@ -123,11 +112,9 @@ void ITask() {
                     SendEvent_Ability(TIME_TICK_1M_SIG, 0);
                     SendEvent_PlayerType(TIME_TICK_1M_SIG, 0);
                 }
-#endif
                 break;
 
             // ==== Radio ====
-#if SM_EN
             case evtIdLustraDamagePkt:
                 SendEvent_Health(DMG_RCVD_SIG , Msg.Value);
                 SendEvent_PlayerType(DMG_RCVD_SIG , Msg.Value);
@@ -140,31 +127,24 @@ void ITask() {
             case evtIdShinePktMutant:
                 SendEvent_Health(SHINE_RCVD_SIG, 0);
                 break;
-#endif
-
             case evtIdButtons:
                 Printf("Btn %u\r", Msg.BtnEvtInfo.BtnID[0]);
                 if(Msg.BtnEvtInfo.Type == beShortPress) {
-#if SM_EN
                     if(Msg.BtnEvtInfo.BtnID[0] == 1) { // Central, check mutant
                         SendEvent_Ability(CENTRAL_BUTTON_PRESSED_SIG, 0);
                     }
                     else {
                         SendEvent_Health(FIRST_BUTTON_PRESSED_SIG, 0);
                     }
-#endif
                 }
                 else if(Msg.BtnEvtInfo.Type == beLongCombo and Msg.BtnEvtInfo.BtnCnt == 3) {
                     Printf("Combo\r");
-#if SM_EN
                     SendEvent_Ability(SHINE_SIG, 0);
-#endif
                 }
                 break;
 
             case evtIdPillConnected:
                 Printf("Pill: %u\r", PillMgr.Pill.DWord32);
-#if SM_EN
                 switch(PillMgr.Pill.DWord32) {
                     case 0: SendEvent_PlayerType(PILL_RESET_SIG, 0); break;
                     case 1: SendEvent_Health(PILL_HEAL_SIG, 0); break;
@@ -174,7 +154,6 @@ void ITask() {
                     case 5: SendEvent_Ability(PILL_MUTANT_SIG, 0); break;
                     default: break;
                 }
-#endif
                 break;
 
             case evtIdPillDisconnected:
@@ -198,7 +177,6 @@ void CheckRxData() {
     }
 }
 
-#if SM_EN // ======================== State Machines ===========================
 BaseChunk_t vsqSMBrr[] = {
         {csSetup, VIBRO_VOLUME},
         {csWait, 99},
@@ -378,7 +356,6 @@ void SendEvent_PlayerType(int QSig, unsigned int Value) {
     // Printf("evtPlayerType: %d; %d\r", e.super.sig, e.value);
     QMSM_DISPATCH(the_player_type, &(e.super));
 }
-#endif
 
 #if 1 // ================= Command processing ====================
 void OnCmd(Shell_t *PShell) {
@@ -410,7 +387,6 @@ void OnCmd(Shell_t *PShell) {
         PShell->Ack(r);
     }
 
-#if SM_EN
     else if(PCmd->NameIs("Rst")) {
         State_Save(DEAD);
         Ability_Save(DISABLED);
@@ -421,7 +397,6 @@ void OnCmd(Shell_t *PShell) {
         ChargeTime_Save(0);
         PShell->Ack(retvOk);
     }
-#endif
 
 #if 1 // === Pill ===
     else if(PCmd->NameIs("ReadPill")) {
