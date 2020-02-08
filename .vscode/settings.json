@@ -4,5 +4,6 @@
     "cstdlib": "cpp"
   },
   "cmake.configureOnOpen": true,
-  "C_Cpp.default.configurationProvider": "vector-of-bool.cmake-tools"
+  "C_Cpp.default.configurationProvider": "vector-of-bool.cmake-tools",
+  "cmake.configureSettings": { "CMAKE_TOOLCHAIN_FILE:PATH": "toolchain.cmake" }
 }
