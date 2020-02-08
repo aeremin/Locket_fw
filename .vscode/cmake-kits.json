@@ -1,0 +1,10 @@
+[
+    {
+      "name": "AWESOME G++",
+      "toolchainFile": "./toolchain.cmake",
+      "compilers": {
+        "C": "arm-none-eabi-gcc",
+        "CXX": "arm-none-eabi-g++"
+      }
+    }
+  ]
