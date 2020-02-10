@@ -62,30 +62,9 @@
 
 #endif // GPIO
 
-#if 1 // ========================= Timer =======================================
-#endif // Timer
-
 #define I2C1_BAUDRATE   400000
 #define I2C_PILL        i2c1
 
-#if ADC_REQUIRED // ======================= Inner ADC ==========================
-// Clock divider: clock is generated from the APB2
-#define ADC_CLK_DIVIDER     adcDiv2
-
-// ADC channels
-//#define BAT_CHNL          1
-
-#define ADC_VREFINT_CHNL    17  // All 4xx, F072 and L151 devices. Do not change.
-#define ADC_CHANNELS        { ADC_VREFINT_CHNL }
-#define ADC_CHANNEL_CNT     1   // Do not use countof(AdcChannels) as preprocessor does not know what is countof => cannot check
-#define ADC_SAMPLE_TIME     ast96Cycles
-#define ADC_SAMPLE_CNT      8   // How many times to measure every channel
-
-#define ADC_SEQ_LEN         (ADC_SAMPLE_CNT * ADC_CHANNEL_CNT)
-
-#endif
-
-#if 1 // =========================== DMA =======================================
 #define STM32_DMA_REQUIRED  TRUE
 // ==== Uart ====
 #define UART_DMA_TX_MODE(Chnl) (STM32_DMA_CR_CHSEL(Chnl) | DMA_PRIORITY_LOW | STM32_DMA_CR_MSIZE_BYTE | STM32_DMA_CR_PSIZE_BYTE | STM32_DMA_CR_MINC | STM32_DMA_CR_DIR_M2P | STM32_DMA_CR_TCIE)
@@ -98,20 +77,6 @@
 #define I2C1_DMA_RX     STM32_DMA_STREAM_ID(1, 7)
 #define I2C1_DMA_CHNL   0   // Dummy
 
-#if ADC_REQUIRED
-#define ADC_DMA         STM32_DMA1_STREAM1
-#define ADC_DMA_MODE    STM32_DMA_CR_CHSEL(0) |   /* dummy */ \
-                        DMA_PRIORITY_LOW | \
-                        STM32_DMA_CR_MSIZE_HWORD | \
-                        STM32_DMA_CR_PSIZE_HWORD | \
-                        STM32_DMA_CR_MINC |       /* Memory pointer increase */ \
-                        STM32_DMA_CR_DIR_P2M |    /* Direction is peripheral to memory */ \
-                        STM32_DMA_CR_TCIE         /* Enable Transmission Complete IRQ */
-#endif // ADC
-
-#endif // DMA
-
-#if 1 // ========================== USART ======================================
 #define PRINTF_FLOAT_EN FALSE
 #define UART_TXBUF_SZ   256
 #define UART_RXBUF_SZ   99
@@ -121,5 +86,3 @@
 #define CMD_UART_PARAMS \
     USART1, UART_GPIO, UART_TX_PIN, UART_GPIO, UART_RX_PIN, \
     UART_DMA_TX, UART_DMA_RX, UART_DMA_TX_MODE(UART_DMA_CHNL), UART_DMA_RX_MODE(UART_DMA_CHNL)
-
-#endif
