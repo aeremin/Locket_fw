@@ -10,10 +10,6 @@
 // Freq of external crystal if any. Leave it here even if not used.
 #define CRYSTAL_FREQ_HZ     12000000
 
-#define I2C_USE_SEMAPHORE   FALSE
-#define ADC_REQUIRED        FALSE
-
-#if 1 // ========================== GPIO =======================================
 // PortMinTim_t: GPIO, Pin, Tim, TimChnl, invInverted, omPushPull, TopValue
 // UART
 #define UART_GPIO       GPIOA
@@ -59,8 +55,6 @@
 
 // Radio: SPI, PGpio, Sck, Miso, Mosi, Cs, Gdo0
 #define CC_Setup0       SPI1, GPIOA, 5,6,7, GPIOA,4, GPIOA,3
-
-#endif // GPIO
 
 #define I2C1_BAUDRATE   400000
 #define I2C_PILL        i2c1
