@@ -1,7 +1,6 @@
 /*
  * shell.cpp
  *
- *  Created on: 21 апр. 2017 г.
  *      Author: Kreyl
  */
 
@@ -90,12 +89,10 @@ void ByteShell_t::Reply(uint8_t CmdCode, uint32_t Len, uint8_t *PData) {
 }
 #endif
 
-#if PRINTF_FLOAT_EN
 #define FLOAT_PRECISION     9
 static const long power10Table[FLOAT_PRECISION] = {
     10, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000, 1000000000
 };
-#endif
 
 void PrintfHelper_t::PrintEOL() {
     IPutChar('\r');
@@ -177,7 +174,6 @@ void PrintfHelper_t::IVsPrintf(const char *format, va_list args) {
             }
             break;
 
-#if PRINTF_FLOAT_EN
             case 'f': {
                 float f = (float)va_arg(args, double);
                 if (f < 0) {
@@ -194,7 +190,6 @@ void PrintfHelper_t::IVsPrintf(const char *format, va_list args) {
                 n = (long)((f - n) * power10Table[precision - 1]);
                 if(IPutUint(n, 10, width, filler) != retvOk) goto End;
             } break;
-#endif
 
             case 'A': {
                 uint8_t *arr = va_arg(args, uint8_t*);

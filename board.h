@@ -71,7 +71,6 @@
 #define I2C1_DMA_RX     STM32_DMA_STREAM_ID(1, 7)
 #define I2C1_DMA_CHNL   0   // Dummy
 
-#define PRINTF_FLOAT_EN FALSE
 #define UART_TXBUF_SZ   256
 #define UART_RXBUF_SZ   99
 
