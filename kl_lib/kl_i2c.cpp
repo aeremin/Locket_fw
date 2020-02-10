@@ -71,12 +71,7 @@ void i2c_t::Init() {
 
 void i2c_t::Standby() {
     if(PParams->pi2c == I2C1) { rccResetI2C1(); rccDisableI2C1(); }
-#ifdef I2C2
     else if(PParams->pi2c == I2C2) { rccResetI2C2(); rccDisableI2C2(); }
-#endif
-#if defined I2C3
-    else if (PParams->pi2c == I2C3) { rccResetI2C3(); rccDisableI2C3(); }
-#endif
     // Disable GPIOs
     PinSetupAnalog(PParams->PGpio, PParams->SclPin);
     PinSetupAnalog(PParams->PGpio, PParams->SdaPin);
