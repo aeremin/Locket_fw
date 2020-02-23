@@ -165,8 +165,13 @@ void ReadAndSetupMode() {
     Printf("Dip: 0x%02X\r", b);
     OldDipSettings = b;
     // Select Color ID
-    Radio.PktTx.ID = ((b >> 4) > 6)? 0 : (b >> 4);
-    lsqCurrent[0].Color = ClrTable[Radio.PktTx.ID];
+    uint8_t id = (b & 0b01110000) >> 4;
+    Radio.PktTx.id = (id > 6)? 0 : id;
+    Radio.PktTx.configure_mode = b & 0b10000000;
+    Radio.PktTx.r_background = Radio.PktTx.r = ClrTable[Radio.PktTx.id].R;
+    Radio.PktTx.g_background = Radio.PktTx.g = ClrTable[Radio.PktTx.id].G;
+    Radio.PktTx.b_background = Radio.PktTx.b = ClrTable[Radio.PktTx.id].B;
+    lsqCurrent[0].Color = ClrTable[Radio.PktTx.id];
     Led.StartOrRestart(lsqCurrent);
 
     // Select power

@@ -57,11 +57,10 @@ static inline void Lvl250ToLvl1000(uint16_t *PLvl) {
 
 #if 1 // =========================== Pkt_t =====================================
 struct rPkt_t {
-    uint32_t ID;
-    rPkt_t& operator = (const rPkt_t &Right) {
-        ID = Right.ID;
-        return *this;
-    }
+	  uint8_t id;
+	  uint8_t r, g, b;
+	  uint8_t r_background, g_background, b_background;
+	  bool configure_mode;
 } __attribute__ ((__packed__));
 #endif
 
