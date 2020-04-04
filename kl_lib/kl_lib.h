@@ -39,7 +39,7 @@
 #define __noreturn      __attribute__((noreturn))
 #define __packed        __attribute__((__packed__))
 #define __align4        __attribute__((aligned (4)))
-// Also remember __unused and __always_inline
+// Also remember __unused and __attribute__ ((always_inline))
 #ifndef countof
 #define countof(A)  (sizeof(A)/sizeof(A[0]))
 #endif
@@ -650,31 +650,31 @@ enum AlterFunc_t {
 
 // Set/clear
 #if defined STM32F4XX || defined STM32F042x6
-__always_inline
+__attribute__ ((always_inline))
 static inline void PinSetHi(GPIO_TypeDef *PGpio, uint16_t APin) { PGpio->BSRRL = (1 << APin); }
-__always_inline
+__attribute__ ((always_inline))
 static inline void PinSetLo(GPIO_TypeDef *PGpio, uint16_t APin) { PGpio->BSRRH = (1 << APin); }
 #elif defined STM32F2XX || defined STM32L1XX
-__always_inline
+__attribute__ ((always_inline))
 static inline void PinSetHi(GPIO_TypeDef *PGpio, uint32_t APin) { PGpio->BSRR = 1 << APin; }
-__always_inline
+__attribute__ ((always_inline))
 static inline void PinSetLo(GPIO_TypeDef *PGpio, uint32_t APin) { PGpio->BSRR = 1 << (APin + 16);  }
 #elif defined STM32F0XX || defined STM32F10X_LD_VL || defined STM32L4XX || defined STM32F103xE
-__always_inline
+__attribute__ ((always_inline))
 static inline void PinSetHi(GPIO_TypeDef *PGpio, uint32_t APin) { PGpio->BSRR = 1 << APin; }
-__always_inline
+__attribute__ ((always_inline))
 static inline void PinSetLo(GPIO_TypeDef *PGpio, uint32_t APin) { PGpio->BRR = 1 << APin;  }
 #endif
-__always_inline
+__attribute__ ((always_inline))
 static inline void PinToggle(GPIO_TypeDef *PGpio, uint32_t APin) { PGpio->ODR ^= 1 << APin; }
 // Check input
-__always_inline
+__attribute__ ((always_inline))
 static inline bool PinIsHi(GPIO_TypeDef *PGpio, uint32_t APin) { return PGpio->IDR & (1 << APin); }
-__always_inline
+__attribute__ ((always_inline))
 static inline bool PinIsHi(const GPIO_TypeDef *PGpio, uint32_t APin) { return PGpio->IDR & (1 << APin); }
-__always_inline
+__attribute__ ((always_inline))
 static inline bool PinIsLo(GPIO_TypeDef *PGpio, uint32_t APin) { return !(PGpio->IDR & (1 << APin)); }
-__always_inline
+__attribute__ ((always_inline))
 static inline bool PinIsLo(const GPIO_TypeDef *PGpio, uint32_t APin) { return !(PGpio->IDR & (1 << APin)); }
 
 // Setup
@@ -938,21 +938,21 @@ static inline void PortInit(GPIO_TypeDef *PGpioPort,
     }
 }
 
-__always_inline
+__attribute__ ((always_inline))
 static inline void PortSetupOutput(GPIO_TypeDef *PGpioPort) {
     PGpioPort->MODER = 0x55555555;
 }
-__always_inline
+__attribute__ ((always_inline))
 static inline void PortSetupInput(GPIO_TypeDef *PGpioPort) {
     PGpioPort->MODER = 0x00000000;
 }
 #endif
 
-__always_inline
+__attribute__ ((always_inline))
 static inline void PortSetValue(GPIO_TypeDef *PGpioPort, uint16_t Data) {
     PGpioPort->ODR = Data;
 }
-__always_inline
+__attribute__ ((always_inline))
 static inline uint16_t PortGetValue(GPIO_TypeDef *PGpioPort) {
     return PGpioPort->IDR;
 }

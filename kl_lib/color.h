@@ -1,7 +1,7 @@
 /*
  * color.h
  *
- *  Created on: 05 апр. 2014 г.
+ *  Created on: 05 пїЅпїЅпїЅ. 2014 пїЅ.
  *      Author: Kreyl
  */
 
@@ -36,7 +36,7 @@ static inline int32_t CalcSmooth_st_from_ms(int32_t Duration_ms) {
 
 struct Color_t {
 private:
-    __always_inline
+	__attribute__ ((always_inline))
     inline uint8_t SetSingleBrt(int32_t v, const int32_t Brt, const int32_t BrtMax) {
         if(v > 0) {
             v = (v * Brt) / BrtMax;
